@@ -1,7 +1,8 @@
 import classes from './CartButton.module.css';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 
 import { shopActions } from '../../store/shop-slice';
+import { cartActions } from '../../store/cart-slice';
 
 
 const CartButton = (props) => {
@@ -9,10 +10,11 @@ const CartButton = (props) => {
   const cartToggleHandler = () => {
     dispatch(shopActions.toggle());
   }
+  const cartFrequency = useSelector(state => state.cart.totalQuantity)
   return (
     <button className={classes.button} onClick={cartToggleHandler}>
       <span>My Cart</span>
-      <span className={classes.badge}>1</span>
+      <span className={classes.badge}>{cartFrequency}</span>
     </button>
   );
 };
